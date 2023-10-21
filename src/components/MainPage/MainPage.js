@@ -51,38 +51,40 @@ const MainPage = () => {
   }, []);
 
   return (
-    <div className="container">
-      {/* <Navbar /> */}
-      <div className="messages-container">
-        {messages.map((message, index) => {
-          return (
-            <Message
-              key={index}
-              value={message[3]}
-              avatar={message[2]}
-              sender_id={message[1]}
-            />
-          );
-        })}
-      </div>
-      <div className="message-input-container">
-        <input
-          type="text"
-          className="my-input"
-          style={{ flex: "9" }}
-          value={message}
-          onChange={(e) => {
-            setMessage(e.target.value);
-          }}
-          placeholder="Type your message"
-        ></input>
-        <button
-          onClick={() => handleClick()}
-          className="my-button"
-          style={{ flex: "1" }}
-        >
-          Enter
-        </button>
+    <div>
+      <Navbar />
+      <div className="container">
+        <div className="messages-container">
+          {messages.map((message, index) => {
+            return (
+              <Message
+                key={index}
+                value={message[3]}
+                avatar={message[2]}
+                sender_id={message[1]}
+              />
+            );
+          })}
+        </div>
+        <div className="message-input-container">
+          <input
+            type="text"
+            className="my-input"
+            style={{ flex: "9" }}
+            value={message}
+            onChange={(e) => {
+              setMessage(e.target.value);
+            }}
+            placeholder="Type your message"
+          ></input>
+          <button
+            onClick={() => handleClick()}
+            className="my-button"
+            style={{ flex: "1" }}
+          >
+            Enter
+          </button>
+        </div>
       </div>
     </div>
   );

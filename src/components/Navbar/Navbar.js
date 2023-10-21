@@ -11,31 +11,22 @@ const Navbar = () => {
   }, []);
 
   return (
-    <div>
-      <ul
+    <div style={{ position: "absolute", right: 0 }}>
+      <button
         style={{
-          listStyleType: "none",
-          display: "flex",
-          justifyContent: "center",
+          border: "none",
+          backgroundColor: "white",
+          cursor: "pointer",
+          color: "red",
+          fontWeight: 500,
+        }}
+        onClick={() => {
+          localStorage.setItem("user_id", 0);
+          navigate("/login");
         }}
       >
-        <li>
-          <button
-            style={{
-              border: "none",
-              backgroundColor: "white",
-              cursor: "pointer",
-              color: "red",
-            }}
-            onClick={() => {
-              localStorage.setItem("user_id", 0);
-              navigate("/login");
-            }}
-          >
-            Logout
-          </button>
-        </li>
-      </ul>
+        Logout
+      </button>
     </div>
   );
 };
