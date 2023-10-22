@@ -65,13 +65,14 @@
   padding: 0px;
 }
 
-.my-input,
-.my-button {
-  height: 40px; /* Adjust the height to match your design */
-  padding: 5px; /* Add padding for better visual appearance, if needed */
+.message-input,
+.send-button {
+  height: 45px;
+  padding: 8px;
+  font-weight: 500;
 }
 
-.my-input {
+.message-input {
   width: 80%;
   border: 1px solid #cccccc72;
   background: #eceaeb;
@@ -80,15 +81,15 @@
   transition: 0.5s;
 }
 
-.my-input:hover {
+.message-input:hover {
   border: 1px solid #2086ea;
 }
 
-.my-input:focus {
+.message-input:focus {
   border: 1px solid #1f6cb7;
 }
 
-.my-button {
+.send-button {
   border: 1px solid #2086ea;
   margin-left: 5px;
   color: #2086ea;
@@ -97,7 +98,7 @@
   transition: 0.5s;
 }
 
-.my-button:hover {
+.send-button:hover {
   border-color: #2086ea;
   background-color: #2086ea;
   color: white;
@@ -124,12 +125,6 @@
   justify-content: center;
   height: 90vh;
   text-align: center;
-}
-
-.custom-file-input {
-  color: #0073e6;
-  border: none;
-  cursor: pointer;
 }
 
 #fileInput {
@@ -184,4 +179,11 @@ p {
 
 .custom-button:active {
   background-color: #1f6cb7;
+}
+
+.fileinput-container {
+  display: flex;
+  width: 400px;
+  align-items: center;
+  justify-content: center;
 }

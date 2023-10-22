@@ -1,12 +1,16 @@
 import React from "react";
 
-const FileInput = ({ onChange }) => {
+const FileInput = ({ handleFileChange }) => {
   return (
     <div className="file-input-container">
-      <label htmlFor="fileInput" className="custom-file-input">
-        Choose Profile Picture
+      <label htmlFor="fileInput" style={{
+        cursor: "pointer",
+        color: "#2086ea",
+        fontWeight: 500,
+      }}>
+        Select File
       </label>
-      <input type="file" id="fileInput" onChange={() => onChange()} />
+      <input type="file" id="fileInput" onChange={handleFileChange} />
     </div>
   );
 };

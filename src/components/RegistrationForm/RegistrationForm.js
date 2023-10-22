@@ -25,7 +25,7 @@ const RegistrationForm = () => {
   };
 
   useEffect(() => {
-    if (localStorage.getItem("user_id") > 0) {
+    if (localStorage.getItem("userId") > 0) {
       navigate("/main");
     }
   }, []);
@@ -55,15 +55,18 @@ const RegistrationForm = () => {
         }}
         className="custom-input"
       />
-      <br />
-      {/* <FileInput
-        onChange={(e) => {
-          setFile(e.target.files[0]);
-        }}
-      />
-      <br /> */}
-      <button className="custom-button" onClick={() => handleClick()}>
-        SIGN UP
+      <div className="fileinput-container">
+        <p className="invisible" style={{ marginRight: "12px" }}>
+          Please select your profile picture:
+        </p>
+        <FileInput
+          handleFileChange={(e) => {
+            setFile(e.target.files[0]);
+          }}
+        />
+      </div>
+      <button className="custom-button" onClick={handleClick}>
+        Sign Up
       </button>
       <div style={{ width: "450px" }}>
         <p style={{ fontWeight: 500 }}>
@@ -72,7 +75,7 @@ const RegistrationForm = () => {
             to="/login"
             style={{ textDecoration: "none", color: "#4B9EEE" }}
           >
-            Sign in
+            Sign In
           </Link>
         </p>
       </div>

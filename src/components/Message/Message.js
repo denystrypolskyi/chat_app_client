@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 
-const Message = ({ value, avatar, sender_id }) => {
+const Message = ({ value, avatar, senderId }) => {
   const [image, setImage] = useState(null);
 
-  const user_id = localStorage.getItem("user_id");
+  const userId = localStorage.getItem("userId");
 
   useEffect(() => {
     import(`../../assets/img/${avatar}`)
@@ -18,7 +18,7 @@ const Message = ({ value, avatar, sender_id }) => {
   return (
     <div
       className={
-        user_id === sender_id
+        userId === senderId
           ? "my-message-container"
           : "member-message-container"
       }
@@ -26,7 +26,7 @@ const Message = ({ value, avatar, sender_id }) => {
       <img src={image} alt="avatar" className="avatar"></img>
       <p
         className={
-          user_id === sender_id ? "my-message-text" : "member-message-text"
+          userId === senderId ? "my-message-text" : "member-message-text"
         }
       >
         {value}

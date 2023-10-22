@@ -5,20 +5,20 @@ import { useNavigate } from "react-router";
 import Message from "../Message/Message";
 
 const MainPage = () => {
-  const [message, setMessage] = useState("");
+  const [messageText, setMessageText] = useState("");
   const [messages, setMessages] = useState([]);
 
   const navigate = useNavigate();
 
   const handleClick = () => {
     const URL = "http://localhost/server/sendMessage.php";
-    const user_id = localStorage.getItem("user_id");
-    const sender_avatar = localStorage.getItem("avatar");
+    const userId = localStorage.getItem("userId");
+    const senderAvatar = localStorage.getItem("avatar");
 
     const data = {
-      user_id: user_id,
-      content: message,
-      sender_avatar: sender_avatar,
+      userId: userId,
+      messageText: messageText,
+      senderAvatar: senderAvatar,
     };
 
     axios
@@ -26,14 +26,16 @@ const MainPage = () => {
       .then((response) => {
         if (response.data.status === "success") {
           console.log(response.data);
-          setMessage("");
+          setMessageText("");
+        } else {
+          console.log(response.data);
         }
       })
       .catch((error) => console.error("Error: ", error));
   };
 
   useEffect(() => {
-    if (localStorage.getItem("user_id") <= 0) {
+    if (localStorage.getItem("userId") <= 0) {
       navigate("/login");
     }
 
@@ -61,7 +63,7 @@ const MainPage = () => {
                 key={index}
                 value={message[3]}
                 avatar={message[2]}
-                sender_id={message[1]}
+                senderId={message[1]}
               />
             );
           })}
@@ -69,17 +71,17 @@ const MainPage = () => {
         <div className="message-input-container">
           <input
             type="text"
-            className="my-input"
+            className="message-input"
             style={{ flex: "9" }}
-            value={message}
+            value={messageText}
             onChange={(e) => {
-              setMessage(e.target.value);
+              setMessageText(e.target.value);
             }}
             placeholder="Type your message"
           ></input>
           <button
-            onClick={() => handleClick()}
-            className="my-button"
+            onClick={handleClick}
+            className="send-button"
             style={{ flex: "1" }}
           >
             Enter

@@ -19,16 +19,19 @@ const Login = () => {
       .post(URL, formData)
       .then((response) => {
         if (response.data.status === "success") {
-          localStorage.setItem("user_id", response.data.user_id);
+          console.log(response.data);
+          localStorage.setItem("userId", response.data.userId);
           localStorage.setItem("avatar", response.data.avatar);
           navigate("/main");
+        } else {
+          console.log(response.data);
         }
       })
       .catch((error) => console.error("Error: ", error));
   };
 
   useEffect(() => {
-    if (localStorage.getItem("user_id") > 0) {
+    if (localStorage.getItem("userId") > 0) {
       navigate("/main");
     }
   }, []);
@@ -59,8 +62,8 @@ const Login = () => {
         className="custom-input"
       />
       <br />
-      <button className="custom-button" onClick={() => handleClick()}>
-        SIGN IN
+      <button className="custom-button" onClick={handleClick}>
+        Sign In
       </button>
       <div style={{ width: "450px" }}>
         <p style={{ fontWeight: 500 }}>
@@ -69,7 +72,7 @@ const Login = () => {
             style={{ textDecoration: "none", color: "#4B9EEE" }}
             to="/register"
           >
-            Sign up
+            Sign Up
           </Link>
         </p>
       </div>
