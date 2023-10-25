@@ -10,23 +10,46 @@ const MainPage = () => {
 
   const navigate = useNavigate();
 
+  const getMessages = () => {
+    const URL = "https://misapplied-liver.000webhostapp.com/getMessages.php";
+    axios
+      .get(URL)
+      .then((response) => {
+        if (response.data.status === "success") {
+          console.log(response.data);
+          setMessages(response.data.messages);
+          setTimeout(() => {
+            getMessages();
+          }, 1000);
+        }
+      })
+      .catch((error) => console.error("Error: ", error));
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.code === "Enter") {
+      handleClick();
+    }
+  };
+
   const handleClick = () => {
-    const URL = "http://localhost/server/sendMessage.php";
+    // const URL = "http://localhost/server/sendMessage.php";
+    const URL = "https://misapplied-liver.000webhostapp.com/sendMessage.php";
     const userId = localStorage.getItem("userId");
     const senderAvatar = localStorage.getItem("avatar");
 
-    const data = {
-      userId: userId,
-      messageText: messageText,
-      senderAvatar: senderAvatar,
-    };
+    const formData = new FormData();
+    formData.append("userId", userId);
+    formData.append("messageText", messageText);
+    formData.append("senderAvatar", senderAvatar);
 
     axios
-      .post(URL, data)
+      .post(URL, formData)
       .then((response) => {
         if (response.data.status === "success") {
           console.log(response.data);
           setMessageText("");
+          getMessages();
         } else {
           console.log(response.data);
         }
@@ -38,18 +61,7 @@ const MainPage = () => {
     if (localStorage.getItem("userId") <= 0) {
       navigate("/login");
     }
-
-    const URL = "http://localhost/server/getMessages.php";
-
-    axios
-      .get(URL)
-      .then((response) => {
-        if (response.data.status === "success") {
-          console.log(response.data);
-          setMessages(response.data.messages);
-        }
-      })
-      .catch((error) => console.error("Error: ", error));
+    getMessages();
   }, []);
 
   return (
@@ -77,6 +89,7 @@ const MainPage = () => {
             onChange={(e) => {
               setMessageText(e.target.value);
             }}
+            onKeyDown={handleKeyDown}
             placeholder="Type your message"
           ></input>
           <button

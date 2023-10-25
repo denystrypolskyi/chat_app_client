@@ -69,7 +69,8 @@
 .send-button {
   height: 45px;
   padding: 8px;
-  font-weight: 500;
+  font-weight: 600;
+  border-radius: 5px;
 }
 
 .message-input {
@@ -105,7 +106,7 @@
   cursor: pointer;
 }
 
-.my-button:active {
+.send-button:active {
   border-color: #1f6cb7;
   background-color: #1f6cb7;
   color: white;
@@ -164,10 +165,9 @@ p {
   border-radius: 10px;
   background-color: #3390ec;
   color: white;
-  font-weight: 50;
   height: 45px;
   width: 400px;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
   -webkit-transition: 0.5s;
   transition: 0.5s;
@@ -186,4 +186,8 @@ p {
   width: 400px;
   align-items: center;
   justify-content: center;
+}
+
+.error {
+  color: red;
 }

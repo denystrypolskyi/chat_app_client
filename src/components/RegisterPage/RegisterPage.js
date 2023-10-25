@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import FileInput from "../FileInput/FileInput";
 
-const RegistrationForm = () => {
+const RegisterPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [file, setFile] = useState("");
+  const [error, setError] = useState("");
+  const [infoMessage, setInfoMessage] = useState("");
 
   const navigate = useNavigate();
 
   const handleClick = () => {
-    const URL = "http://localhost/server/register.php";
+    // const URL = "http://localhost/server/register.php";
+    const URL = "https://misapplied-liver.000webhostapp.com/register.php";
     const formData = new FormData();
 
     formData.append("email", email);
@@ -20,7 +22,19 @@ const RegistrationForm = () => {
 
     axios
       .post(URL, formData)
-      .then((response) => console.log(response.data))
+      .then((response) => {
+        console.log(response);
+        if (response.data.status === "success") {
+          setInfoMessage("Account created.");
+          setEmail("");
+          setPassword("");
+          setFile("");
+          setError("");
+        } else {
+          setInfoMessage("");
+          setError(response.data.message);
+        }
+      })
       .catch((error) => console.error("Error: ", error));
   };
 
@@ -32,6 +46,12 @@ const RegistrationForm = () => {
 
   return (
     <div className="center-container">
+      {infoMessage && (
+        <p className="infoMessage" style={{ color: "green" }}>
+          {infoMessage}
+        </p>
+      )}
+      {error && <p className="error">{error}</p>}
       <h1>Getting started is easy!</h1>
       <p className="invisible">
         Create a new account if you don't have one to access Whisper features.
@@ -59,11 +79,25 @@ const RegistrationForm = () => {
         <p className="invisible" style={{ marginRight: "12px" }}>
           Please select your profile picture:
         </p>
-        <FileInput
-          handleFileChange={(e) => {
-            setFile(e.target.files[0]);
-          }}
-        />
+        <div className="file-input-container">
+          <label
+            htmlFor="fileInput"
+            style={{
+              cursor: "pointer",
+              color: "#2086ea",
+              fontWeight: 500,
+            }}
+          >
+            Select File
+          </label>
+          <input
+            type="file"
+            id="fileInput"
+            onChange={(e) => {
+              setFile(e.target.files[0]);
+            }}
+          />
+        </div>
       </div>
       <button className="custom-button" onClick={handleClick}>
         Sign Up
@@ -83,4 +117,4 @@ const RegistrationForm = () => {
   );
 };
 
-export default RegistrationForm;
+export default RegisterPage;

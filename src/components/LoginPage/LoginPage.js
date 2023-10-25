@@ -2,14 +2,16 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 
-const Login = () => {
+const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
   const handleClick = () => {
-    const URL = "http://localhost/server/login.php";
+    // const URL = "http://localhost/server/login.php";
+    const URL = "https://misapplied-liver.000webhostapp.com/login.php";
     const formData = new FormData();
 
     formData.append("email", email);
@@ -24,6 +26,7 @@ const Login = () => {
           localStorage.setItem("avatar", response.data.avatar);
           navigate("/main");
         } else {
+          setError(response.data.message);
           console.log(response.data);
         }
       })
@@ -38,6 +41,7 @@ const Login = () => {
 
   return (
     <div className="center-container">
+      {error && <p className="error">{error}</p>}
       <h1 className="">Welcome Back!</h1>
       <p className="invisible">
         Enter your credentials to access your Whisper account.
@@ -80,4 +84,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginPage;

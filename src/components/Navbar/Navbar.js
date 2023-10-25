@@ -5,14 +5,28 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   return (
-    <div style={{ position: "absolute", right: 0 }}>
+    <div style={{ width: "50%", margin: "auto", display: "flex", justifyContent: "space-between"}}>
       <button
         style={{
           border: "none",
           backgroundColor: "transparent",
           cursor: "pointer",
-          color: "white",
-          fontWeight: 500,
+          color: "#1F6CB7",
+          fontWeight: 600,
+        }}
+        onClick={() => {
+          console.log("Back");
+        }}
+      >
+        Back
+      </button>
+      <button
+        style={{
+          border: "none",
+          backgroundColor: "transparent",
+          cursor: "pointer",
+          color: "red",
+          fontWeight: 600,
         }}
         onClick={() => {
           localStorage.setItem("userId", 0);
