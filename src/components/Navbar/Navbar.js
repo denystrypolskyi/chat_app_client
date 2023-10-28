@@ -5,8 +5,17 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   return (
-    <div style={{ width: "50%", margin: "auto", display: "flex", justifyContent: "space-between"}}>
-      <button
+    <div
+      style={{
+        width: "50%",
+        margin: "auto",
+        display: "flex",
+        justifyContent: "space-between",
+        marginTop: "10px",
+        marginBottom: "10px",
+      }}
+    >
+      {/* <button
         style={{
           border: "none",
           backgroundColor: "transparent",
@@ -19,7 +28,7 @@ const Navbar = () => {
         }}
       >
         Back
-      </button>
+      </button> */}
       <button
         style={{
           border: "none",
@@ -29,7 +38,7 @@ const Navbar = () => {
           fontWeight: 600,
         }}
         onClick={() => {
-          localStorage.setItem("userId", 0);
+          localStorage.setItem("loggedUserId", 0);
           navigate("/login");
         }}
       >

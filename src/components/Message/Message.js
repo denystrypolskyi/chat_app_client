@@ -1,24 +1,24 @@
 import React, { useEffect, useState } from "react";
 
 const Message = ({ value, avatar, senderId }) => {
-  // const [image, setImage] = useState(null);
+  const [image, setImage] = useState(null);
 
-  const userId = localStorage.getItem("userId");
+  const loggedUserId = localStorage.getItem("loggedUserId");
 
-  // useEffect(() => {
-  //   const imageURL = import(`../../assets/img/${avatar}`)
-  //     .then((image) => {
-  //       setImage(image.default);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Image import error", error);
-  //     });
-  // }, []);
+  useEffect(() => {
+    const imageURL = import(`../../assets/img/${avatar}`)
+      .then((image) => {
+        setImage(image.default);
+      })
+      .catch((error) => {
+        console.error("Image import error", error);
+      });
+  }, []);
 
   return (
     <div
       className={
-        userId === senderId
+        loggedUserId === senderId
           ? "my-message-container"
           : "member-message-container"
       }
@@ -26,12 +26,13 @@ const Message = ({ value, avatar, senderId }) => {
       <img
         className="avatar"
         alt="avatar"
-        src={`https://misapplied-liver.000webhostapp.com/images/${avatar}`}
+        src={image}
+        // src={`https://misapplied-liver.000webhostapp.com/images/${avatar}`}
       />
 
       <p
         className={
-          userId === senderId ? "my-message-text" : "member-message-text"
+          loggedUserId === senderId ? "my-message-text" : "member-message-text"
         }
       >
         {value}

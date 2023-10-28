@@ -12,8 +12,8 @@ const RegisterPage = () => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    // const URL = "http://localhost/server/register.php";
-    const URL = "https://misapplied-liver.000webhostapp.com/register.php";
+    const URL = "http://localhost/server/register.php";
+    // const URL = "https://misapplied-liver.000webhostapp.com/register.php";
     const formData = new FormData();
 
     formData.append("email", email);
@@ -39,7 +39,7 @@ const RegisterPage = () => {
   };
 
   useEffect(() => {
-    if (localStorage.getItem("userId") > 0) {
+    if (localStorage.getItem("loggedUserId") === 0) {
       navigate("/main");
     }
   }, []);
@@ -47,13 +47,17 @@ const RegisterPage = () => {
   return (
     <div className="center-container">
       {infoMessage && (
-        <p className="infoMessage" style={{ color: "green" }}>
+        <p className="info-message" style={{ marginBottom: "15px" }}>
           {infoMessage}
         </p>
       )}
-      {error && <p className="error">{error}</p>}
-      <h1>Getting started is easy!</h1>
-      <p className="invisible">
+      {error && (
+        <p className="error" style={{ marginBottom: "15px" }}>
+          {error}
+        </p>
+      )}
+      <h1 className="dark-blue">Getting started is easy!</h1>
+      <p className="light-grey" style={{ marginTop: "15px" }}>
         Create a new account if you don't have one to access Whisper features.
       </p>
       <input
@@ -64,6 +68,7 @@ const RegisterPage = () => {
           setEmail(e.target.value);
         }}
         className="custom-input"
+        style={{ marginTop: "15px" }}
       />
       <br />
       <input
@@ -75,8 +80,8 @@ const RegisterPage = () => {
         }}
         className="custom-input"
       />
-      <div className="fileinput-container">
-        <p className="invisible" style={{ marginRight: "12px" }}>
+      <div className="fileinput-container" style={{ marginTop: "15px" }}>
+        <p className="light-grey" style={{ marginRight: "12px" }}>
           Please select your profile picture:
         </p>
         <div className="file-input-container">
@@ -85,7 +90,6 @@ const RegisterPage = () => {
             style={{
               cursor: "pointer",
               color: "#2086ea",
-              fontWeight: 500,
             }}
           >
             Select File
@@ -99,11 +103,15 @@ const RegisterPage = () => {
           />
         </div>
       </div>
-      <button className="custom-button" onClick={handleClick}>
+      <button
+        className="custom-button"
+        onClick={handleClick}
+        style={{ marginTop: "15px" }}
+      >
         Sign Up
       </button>
-      <div style={{ width: "450px" }}>
-        <p style={{ fontWeight: 500 }}>
+      <div style={{ width: "450px", marginTop: "15px" }}>
+        <p className="dark-blue">
           Already have an account?{" "}
           <Link
             to="/login"

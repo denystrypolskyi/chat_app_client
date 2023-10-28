@@ -10,8 +10,8 @@ const LoginPage = () => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    // const URL = "http://localhost/server/login.php";
-    const URL = "https://misapplied-liver.000webhostapp.com/login.php";
+    const URL = "http://localhost/server/login.php";
+    // const URL = "https://misapplied-liver.000webhostapp.com/login.php";
     const formData = new FormData();
 
     formData.append("email", email);
@@ -22,7 +22,7 @@ const LoginPage = () => {
       .then((response) => {
         if (response.data.status === "success") {
           console.log(response.data);
-          localStorage.setItem("userId", response.data.userId);
+          localStorage.setItem("loggedUserId", response.data.loggedUserId);
           localStorage.setItem("avatar", response.data.avatar);
           navigate("/main");
         } else {
@@ -34,16 +34,16 @@ const LoginPage = () => {
   };
 
   useEffect(() => {
-    if (localStorage.getItem("userId") > 0) {
+    if (localStorage.getItem("loggedUserId") === 0) {
       navigate("/main");
     }
   }, []);
 
   return (
     <div className="center-container">
-      {error && <p className="error">{error}</p>}
-      <h1 className="">Welcome Back!</h1>
-      <p className="invisible">
+      {error && <p className="error" style={{marginBottom: "15px"}}>{error}</p>}
+      <h1 className="dark-blue">Welcome Back!</h1>
+      <p className="light-grey" style={{ marginTop: "15px" }}>
         Enter your credentials to access your Whisper account.
       </p>
       <input
@@ -54,6 +54,7 @@ const LoginPage = () => {
           setEmail(e.target.value);
         }}
         className="custom-input"
+        style={{ marginTop: "15px" }}
       />
       <br />
       <input
@@ -69,8 +70,8 @@ const LoginPage = () => {
       <button className="custom-button" onClick={handleClick}>
         Sign In
       </button>
-      <div style={{ width: "450px" }}>
-        <p style={{ fontWeight: 500 }}>
+      <div style={{ width: "450px", marginTop: "15px"}}>
+        <p className="dark-blue">
           Not a member yet?{" "}
           <Link
             style={{ textDecoration: "none", color: "#4B9EEE" }}
