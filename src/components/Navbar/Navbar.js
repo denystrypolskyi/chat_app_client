@@ -15,20 +15,6 @@ const Navbar = () => {
         marginBottom: "10px",
       }}
     >
-      {/* <button
-        style={{
-          border: "none",
-          backgroundColor: "transparent",
-          cursor: "pointer",
-          color: "#1F6CB7",
-          fontWeight: 600,
-        }}
-        onClick={() => {
-          console.log("Back");
-        }}
-      >
-        Back
-      </button> */}
       <button
         style={{
           border: "none",

@@ -41,7 +41,11 @@ const LoginPage = () => {
 
   return (
     <div className="center-container">
-      {error && <p className="error" style={{marginBottom: "15px"}}>{error}</p>}
+      {error && (
+        <p className="error" style={{ marginBottom: "15px" }}>
+          {error}
+        </p>
+      )}
       <h1 className="dark-blue">Welcome Back!</h1>
       <p className="light-grey" style={{ marginTop: "15px" }}>
         Enter your credentials to access your Whisper account.
@@ -70,7 +74,7 @@ const LoginPage = () => {
       <button className="custom-button" onClick={handleClick}>
         Sign In
       </button>
-      <div style={{ width: "450px", marginTop: "15px"}}>
+      <div style={{ width: "450px", marginTop: "15px" }}>
         <p className="dark-blue">
           Not a member yet?{" "}
           <Link

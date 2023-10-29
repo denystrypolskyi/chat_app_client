@@ -6,7 +6,7 @@ const Message = ({ value, avatar, senderId }) => {
   const loggedUserId = localStorage.getItem("loggedUserId");
 
   useEffect(() => {
-    const imageURL = import(`../../assets/img/${avatar}`)
+    import(`../../assets/img/${avatar}`)
       .then((image) => {
         setImage(image.default);
       })

@@ -1,41 +1,63 @@
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom"; // Импортируем useParams из React Router
 import Message from "../Message/Message";
-import Tate from "../../assets/img/f302415385cda5526b4fcb348adc381a.jpg";
 import Contact from "../Contact/Contact";
 
 const MainPage = () => {
   const [messageText, setMessageText] = useState("");
   const [messages, setMessages] = useState([]);
-  const [selectedChatId, setSelectedChatId] = useState(null);
+  const [contacts, setContacts] = useState([]);
+  const [chatSelected, setChatSelected] = useState(false);
+  const [chatId, setChatId] = useState(null);
+  const [fetching, setFetching] = useState(true);
+
   const messagesEndRef = useRef(null);
+
   const navigate = useNavigate();
 
-  const fetchMessagesForChat = (id) => {
-    setSelectedChatId(id);
-    console.log(id);
-  };
-
-  const getMessages = () => {
-    // const URL = "https://misapplied-liver.000webhostapp.com/getMessages.php";
-    const URL = "https://localhost/server/getMessages.php";
-
+  const fetchContacts = () => {
+    const URL = "http://localhost/server/getContacts.php";
     axios
-      .get(URL)
+      .get(`${URL}?loggedUserId=${localStorage.getItem("loggedUserId")}`)
       .then((response) => {
         if (response.data.status === "success") {
+          setContacts(response.data.contacts);
+          setFetching(false);
+        } else {
           console.log(response.data);
-          setMessages(response.data.messages);
-          setTimeout(() => {
-            getMessages();
-          }, 1000);
         }
-      })
-      .catch((error) => console.error("Error: ", error));
+      });
   };
 
-  const handleClick = () => {
+  const fetchMessagesForChat = (chatId) => {
+    const URL = "http://localhost/server/getChatMessages.php";
+    axios.get(`${URL}?selectedChatId=${chatId}`).then((response) => {
+      if (response.data.status === "success") {
+        setMessages(response.data.messages);
+      } else {
+        console.log(response.data);
+      }
+    });
+  };
+
+  const switchChat = (loggedUserId, contactId) => {
+    setChatSelected(true);
+    const URL = "http://localhost/server/switchChat.php";
+    axios
+      .get(`${URL}?user1Id=${loggedUserId}&user2Id=${contactId}`)
+      .then((response) => {
+        if (response.data.status === "success") {
+          const newChatId = response.data.selectedChatId;
+          navigate(`/main?chatId=${newChatId}`);
+          setChatId(newChatId);
+        } else {
+          console.log(response.data);
+        }
+      });
+  };
+
+  const sendMessage = () => {
     // const URL = "https://misapplied-liver.000webhostapp.com/sendMessage.php";
     const URL = "http://localhost/server/sendMessage.php";
     const loggedUserId = localStorage.getItem("loggedUserId");
@@ -44,14 +66,13 @@ const MainPage = () => {
     formData.append("loggedUserId", loggedUserId);
     formData.append("messageText", messageText);
     formData.append("senderAvatar", senderAvatar);
-
+    formData.append("chatRoomId", chatId);
     axios
       .post(URL, formData)
       .then((response) => {
         if (response.data.status === "success") {
           console.log(response.data);
           setMessageText("");
-          getMessages();
         } else {
           console.log(response.data);
         }
@@ -61,15 +82,33 @@ const MainPage = () => {
 
   const handleKeyDown = (e) => {
     if (e.code === "Enter") {
-      handleClick();
+      sendMessage();
     }
   };
 
   useEffect(() => {
-    if (localStorage.getItem("loggedUserId") === 0) {
-      navigate("/login");
+    if (chatId) {
+      setChatId(chatId);
+      fetchMessagesForChat(chatId);
+      setChatSelected(true);
+
+      const intervalId = setInterval(() => {
+        fetchMessagesForChat(chatId);
+      }, 500);
+
+      return () => {
+        clearInterval(intervalId);
+      };
     }
-    getMessages();
+  }, [chatId]);
+
+  useEffect(() => {
+    const loggedUserId = localStorage.getItem("loggedUserId");
+    if (loggedUserId <= 0) {
+      navigate("/login");
+    } else {
+      fetchContacts();
+    }
   }, []);
 
   useEffect(() => {
@@ -79,15 +118,20 @@ const MainPage = () => {
   return (
     <div className="my-container">
       <div className="contacts">
-        <Contact
-          avatar={Tate}
-          name="Tate"
-          lastMessage="Where is Lydia?"
-          messageDate="7:59 PM"
-          contactId="13"
-          loggedUserId={localStorage.getItem("loggedUserId")}
-          fetchMessagesForChat={fetchMessagesForChat}
-        />
+        {fetching
+          ? "loading..."
+          : contacts.map((contact, index) => {
+              return (
+                <Contact
+                  key={index}
+                  avatar={contact[2]}
+                  name={contact[1]}
+                  contactId={contact[0]}
+                  loggedUserId={localStorage.getItem("loggedUserId")}
+                  switchChat={switchChat}
+                />
+              );
+            })}
       </div>
       <div className="conversation-container">
         <div className="messages-container">
@@ -103,7 +147,7 @@ const MainPage = () => {
           })}
           <div ref={messagesEndRef} />
         </div>
-        {selectedChatId && (
+        {chatSelected && (
           <div className="message-input-container">
             <input
               className="message-input"
@@ -117,7 +161,7 @@ const MainPage = () => {
             />
           </div>
         )}
-        {(messages.length === 0 && !selectedChatId) && (
+        {!chatSelected && (
           <div className="hint">Select a chat to start messaging</div>
         )}
       </div>

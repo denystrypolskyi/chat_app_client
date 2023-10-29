@@ -1,5 +1,4 @@
-import axios from "axios";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const Contact = ({
   avatar,
@@ -8,39 +7,27 @@ const Contact = ({
   messageDate,
   contactId,
   loggedUserId,
-  fetchMessagesForChat
+  switchChat,
 }) => {
-  const handleOnClick = () => {
-    const URL = "http://localhost/server/createChatRoom.php";
-    const formData = new FormData();
-    formData.append("user1Id", loggedUserId);
-    formData.append("user2Id", contactId);
+  const [image, setImage] = useState(null);
 
-    axios
-      .post(URL, formData)
-      .then((response) => {
-        if (response.data.status === "success") {
-          localStorage.setItem("selectedChatId", response.data.selectedChatId)
-          fetchMessagesForChat(localStorage.getItem("selectedChatId"))
-        } else {
-          console.log(response.data);
-        }
-      })
-      .catch((error) => console.error("Error: ", error));
+  const handleOnClick = () => {
+    switchChat(loggedUserId, contactId);
   };
+
+  useEffect(() => {
+    import(`../../assets/img/${avatar}`)
+      .then((image) => {
+        setImage(image.default);
+      })
+      .catch((error) => {
+        console.error("Image import error", error);
+      });
+  }, []);
 
   return (
     <div className="contact-container" onClick={handleOnClick}>
-      <img
-        style={{
-          width: "60px",
-          height: "60px",
-          padding: "6px",
-          borderRadius: "50px",
-        }}
-        src={avatar}
-        alt="avatar"
-      />
+      <img className="contact-avatar" src={image} alt="avatar" />
       <div className="contact-info">
         <div className="contact-name">{name}</div>
         <p className="last-message">{lastMessage}</p>
