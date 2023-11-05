@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [file, setFile] = useState("");
@@ -16,6 +17,7 @@ const RegisterPage = () => {
     // const URL = "https://misapplied-liver.000webhostapp.com/register.php";
     const formData = new FormData();
 
+    formData.append("username", username);
     formData.append("email", email);
     formData.append("password", password);
     formData.append("uploadedFile", file);
@@ -26,6 +28,7 @@ const RegisterPage = () => {
         console.log(response);
         if (response.data.status === "success") {
           setInfoMessage("Account created.");
+          setUsername("");
           setEmail("");
           setPassword("");
           setFile("");
@@ -61,6 +64,16 @@ const RegisterPage = () => {
         Create a new account if you don't have one to access Whisper features.
       </p>
       <input
+        type="text"
+        placeholder="Username"
+        value={username}
+        onChange={(e) => {
+          setUsername(e.target.value);
+        }}
+        className="custom-input"
+        style={{ marginTop: "15px" }}
+      />
+      <input
         type="email"
         placeholder="E-Mail Address"
         value={email}
@@ -70,7 +83,6 @@ const RegisterPage = () => {
         className="custom-input"
         style={{ marginTop: "15px" }}
       />
-      <br />
       <input
         type="password"
         placeholder="**********"
@@ -79,6 +91,7 @@ const RegisterPage = () => {
           setPassword(e.target.value);
         }}
         className="custom-input"
+        style={{ marginTop: "15px" }}
       />
       <div className="fileinput-container" style={{ marginTop: "15px" }}>
         <p className="light-grey" style={{ marginRight: "12px" }}>
