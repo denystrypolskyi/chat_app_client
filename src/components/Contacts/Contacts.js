@@ -1,9 +1,16 @@
 import React from "react";
 import Contact from "../Contact/Contact";
 
-const Contacts = ({ fetchingContacts, contacts, switchChat, selectedContactId }) => {
+const Contacts = ({
+  fetchingContacts,
+  contacts,
+  switchChat,
+  selectedContactId,
+}) => {
   return (
-    <div className="contacts">
+    <div
+      style={{ width: "20vw", backgroundColor: "#17212b", overflowY: "auto" }}
+    >
       {fetchingContacts
         ? "Loading..."
         : contacts.map((contact, index) => {

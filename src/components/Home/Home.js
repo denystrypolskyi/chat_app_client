@@ -1,11 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router";
 import Contacts from "../Contacts/Contacts";
 import Messages from "../Messages/Messages";
 import MessageInput from "../MessageInput/MessageInput";
-
-const MainPage = () => {
+const Home = () => {
   const [messageText, setMessageText] = useState("");
   const [messages, setMessages] = useState([]);
   const [contacts, setContacts] = useState([]);
@@ -56,7 +55,7 @@ const MainPage = () => {
         if (response.data.status === "success") {
           setSelectedContactId(contactId);
           const newChatId = response.data.selectedChatId;
-          navigate(`/main?chatId=${newChatId}`);
+          navigate(`/home?chatId=${newChatId}`);
           setSelectedChatId(newChatId);
         } else {
           console.log(response.data);
@@ -66,7 +65,6 @@ const MainPage = () => {
   };
 
   const sendMessage = () => {
-    // const URL = "https://misapplied-liver.000webhostapp.com/sendMessage.php";
     const URL = "http://localhost/server/sendMessage.php";
     const loggedUserId = localStorage.getItem("loggedUserId");
     const senderAvatar = localStorage.getItem("avatar");
@@ -119,32 +117,38 @@ const MainPage = () => {
   }, []);
 
   return (
-    <div className="my-container">
+    <div className="container">
       <Contacts
         fetchingContacts={fetchingContacts}
         contacts={contacts}
         switchChat={switchChat}
         selectedContactId={selectedContactId}
       />
-      <div className="conversation-container">
-        <Messages
-          fetchingMessages={fetchingMessages}
-          messages={messages}
-          messagesEndRef={messagesEndRef}
-        />
-        {selectedChatId && (
+      {selectedChatId && (
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <Messages
+            fetchingMessages={fetchingMessages}
+            messages={messages}
+            messagesEndRef={messagesEndRef}
+            messageText={messageText}
+            setMessageText={setMessageText}
+            handleKeyDown={handleKeyDown}
+          />
+
           <MessageInput
             messageText={messageText}
             setMessageText={setMessageText}
             handleKeyDown={handleKeyDown}
           />
-        )}
-        {!selectedChatId && (
-          <div className="hint">Select a chat to start messaging</div>
-        )}
-      </div>
+        </div>
+      )}
+      {!selectedChatId && (
+        <div className="hint-container">
+          <p className="hint">Select a chat to start messaging</p>
+        </div>
+      )}
     </div>
   );
 };
 
-export default MainPage;
+export default Home;

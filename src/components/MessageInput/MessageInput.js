@@ -2,7 +2,7 @@ import React from "react";
 
 function MessageInput({ messageText, setMessageText, handleKeyDown }) {
   return (
-    <div className="message-input-container">
+    <>
       <input
         className="message-input"
         type="text"
@@ -13,7 +13,7 @@ function MessageInput({ messageText, setMessageText, handleKeyDown }) {
         }}
         onKeyDown={handleKeyDown}
       />
-    </div>
+    </>
   );
 }
 

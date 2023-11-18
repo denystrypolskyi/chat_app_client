@@ -1,14 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
-const Message = ({ value, avatar, senderId }) => {
+const Message = ({ value, avatar, senderId, sentAt }) => {
   const [image, setImage] = useState(null);
 
   const loggedUserId = localStorage.getItem("loggedUserId");
+
+  const messageSentAt = useRef();
+
+  const formatDate = () => {
+    const tmpDate = new Date(sentAt);
+
+    messageSentAt.current = `${tmpDate.getDate()}/${
+      tmpDate.getMonth() + 1
+    } ${tmpDate.getHours()}:${
+      tmpDate.getMinutes() >= 10
+        ? tmpDate.getMinutes()
+        : "0" + tmpDate.getMinutes()
+    }`;
+  };
 
   useEffect(() => {
     import(`../../assets/img/${avatar}`)
       .then((image) => {
         setImage(image.default);
+        formatDate();
       })
       .catch((error) => {
         console.error("Image import error", error);
@@ -18,24 +33,21 @@ const Message = ({ value, avatar, senderId }) => {
   return (
     <div
       className={
-        loggedUserId === senderId
-          ? "my-message-container"
-          : "member-message-container"
+        senderId === loggedUserId
+          ? "user-message-container"
+          : "sender-message-container"
       }
     >
-      <img
-        className="avatar"
-        alt="avatar"
-        src={image}
-        // src={`https://misapplied-liver.000webhostapp.com/images/${avatar}`}
-      />
-
-      <p
-        className={
-          loggedUserId === senderId ? "my-message-text" : "member-message-text"
-        }
-      >
+      <img className="avatar" alt="avatar" src={image} />
+      <p className={
+        senderId === loggedUserId
+          ? "user-message-text"
+          : "sender-message-text"
+      }>
         {value}
+        <p className="message-sent-at">
+          {messageSentAt.current}
+        </p>
       </p>
     </div>
   );

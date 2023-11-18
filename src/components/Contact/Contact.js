@@ -35,7 +35,7 @@ const Contact = ({
             setLastMessage(response.data.lastMessage);
             setLastMessageSentAt(response.data.lastMessageSentAt);
           } else {
-            console.log(response.data);
+            // console.log(response.data);
           }
         });
     };
@@ -54,20 +54,26 @@ const Contact = ({
   return (
     <div
       className="contact-container"
-      onClick={handleOnClick}
       style={{
-        backgroundColor:
-          selectedContactId === contactId && "#212b35",
+        backgroundColor: selectedContactId === contactId && "#212b35",
       }}
+      onClick={handleOnClick}
     >
       <img className="contact-avatar" src={image} alt="avatar" />
-      <div className="contact-info">
-        <div className="contact-name">{name}</div>
-        <p className="last-message">
+      <div
+        style={{
+          width: "100%",
+          overflow: "hidden",
+        }}
+      >
+        <div className="contact-info">
+          <p className="contact-name">{name}</p>
+          <p className="last-message-sent-at">{lastMessageSentAt}</p>
+        </div>
+        <p className="contact-last-message-text">
           {lastMessage ? lastMessage : <i>No messages yet</i>}
         </p>
       </div>
-      <div className="message-date">{lastMessageSentAt}</div>
     </div>
   );
 };

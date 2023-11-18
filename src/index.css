@@ -7,44 +7,44 @@ body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.my-container {
-  background-color: black;
+.container {
   height: 100vh;
-  width: 100%;
-  color: white;
+  width: 100vw;
   display: flex;
+  background-color: black;
+  color: white;
 }
 
 .contacts {
-  height: 100%;
+  height: 100vh;
   width: 30%;
+  overflow: auto;
   background-color: #17212b;
 }
 
+.contacts::-webkit-scrollbar {
+  display: none;
+}
+
 .contact-info {
-  width: 100%;
-  height: 100%;
+  width: 100;
+  display: flex;
+  flex-direction: row;
 }
 
-.message-date {
-  padding: 6px 6px 6px;
-  position: absolute;
-  right: 0;
-  height: 100%;
-  color: lightgrey;
-}
-
-.conversation-container {
-  width: 100%;
-  position: relative;
-  background-color: #0e1621;
-  max-height: 100vh;
+.last-message-sent-at {
+  flex: 1;
+  font-size: 14px;
+  text-align: end;
+  padding-right: 6px;
 }
 
 .messages-container {
+  display: flex;
+  flex-direction: column;
+  width: 80vw;
   height: 93vh;
-  width: 100%;
-  margin: auto;
+  background-color: #0e1621;
   overflow: auto;
 }
 
@@ -52,94 +52,80 @@ body {
   display: none;
 }
 
-.my-message-container {
+.user-message-container {
   display: flex;
   flex-direction: row-reverse;
-  min-height: 50px;
   align-items: center;
-  padding: 8px;
+  padding: 10px;
 }
 
-.member-message-container {
+.sender-message-container {
   display: flex;
   flex-direction: row;
-  min-height: 50px;
   align-items: center;
   padding: 8px;
 }
 
-.my-message-text {
-  margin-left: 8px;
-  margin-right: 8px;
-  padding: 8px;
-  border-radius: 10px;
-  color: white;
-  background-color: #1f6cb7;
+.message-sent-at {
+  display: inline;
+  margin-left: 10px;
+  font-size: 12px;
 }
 
-.member-message-text {
-  margin-left: 8px;
-  margin-right: 8px;
-  padding: 8px;
-  background-color: #182533;
+.user-message-text {
+  word-wrap: break-word;
+  margin-right: 5px;
+  padding: 8.5px;
   border-radius: 10px;
-  color: white;
+  background-color: #1f6cb7;
+  overflow: auto;
+}
+
+.sender-message-text {
+  word-wrap: break-word;
+  margin-left: 5px;
+  padding: 8.5px;
+  border-radius: 10px;
+  background-color: #1f6cb7;
+  overflow: auto;
 }
 
 .avatar {
   width: 38px;
   height: 38px;
   border-radius: 50px;
-  padding: 0px;
-}
-
-.message-input-container {
-  height: 7vh;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-left: 1px solid #0e1621;
 }
 
 .message-input {
   width: 100%;
-  height: 100%;
+  height: 7vh;
   padding: 8px;
   border: none;
   background: #17212b;
   color: white;
   outline: none;
-  -webkit-transition: 0.5s;
-  transition: 0.5s;
+  border-left: 1px solid #0e1621;
 }
 
 .hint {
-  position: absolute;
-  left: 33%;
-  bottom: 50%;
-  border: none;
   background-color: #1e2c3a;
+  padding: 4px 12px;
   border-radius: 10px;
   display: inline-block;
-  padding: 4px 12px;
 }
 
-.last-message {
-  width: 150px;
-  color: lightgrey;
+.contact-last-message-text {
+  max-width: 100%;
+  height: 21.6px;
   overflow: hidden;
-  white-space: nowrap;
   text-overflow: ellipsis;
+  color: lightgrey;
 }
 
 .contact-container {
-  position: relative;
+  width: 100%;
   display: flex;
-  padding: 6px;
   align-items: center;
-  height: 60px;
-  background-color: #17212b;
 }
 
 .contact-avatar {
@@ -228,4 +214,19 @@ body {
 
 .info-message {
   color: green;
+}
+
+.hint-container {
+  height: 100vh;
+  width: 80vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #0e1621;
+}
+
+.contact-name {
+  max-width: 50%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
