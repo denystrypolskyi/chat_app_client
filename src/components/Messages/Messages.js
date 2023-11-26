@@ -1,21 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Message from "../Message/Message";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 
-const Messages = ({
-  fetchingMessages,
-  messages,
-  messagesEndRef,
-  messageText,
-  setMessageText,
-  handleKeyDown,
-}) => {
+const Messages = ({ fetchingMessages, messages, messagesEndRef }) => {
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView();
   }, [messages.length]);
 
   return (
     <div className="messages-container">
-      {!fetchingMessages &&
+      {fetchingMessages ? (
+        <div className="mini-container">
+          <LoadingSpinner />
+        </div>
+      ) : (
         messages.map((message, index) => {
           return (
             <Message
@@ -26,7 +24,8 @@ const Messages = ({
               sentAt={message[4]}
             />
           );
-        })}
+        })
+      )}
       <div ref={messagesEndRef} />
     </div>
   );

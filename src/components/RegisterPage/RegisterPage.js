@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import { API_URLS } from "../../apiConfig";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 
 const RegisterPage = () => {
   const [username, setUsername] = useState("");
@@ -9,12 +11,15 @@ const RegisterPage = () => {
   const [file, setFile] = useState("");
   const [error, setError] = useState("");
   const [infoMessage, setInfoMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const loggedUserId = parseInt(localStorage.getItem("loggedUserId")) || 0;
 
   const navigate = useNavigate();
 
   const handleClick = () => {
-    const URL = "http://localhost/server/register.php";
-    // const URL = "https://misapplied-liver.000webhostapp.com/register.php";
+    setError("");
+    setIsLoading(true);
     const formData = new FormData();
 
     formData.append("username", username);
@@ -23,10 +28,11 @@ const RegisterPage = () => {
     formData.append("uploadedFile", file);
 
     axios
-      .post(URL, formData)
+      .post(API_URLS.register, formData)
       .then((response) => {
         console.log(response);
         if (response.data.status === "success") {
+          setIsLoading(false);
           setInfoMessage("Account created.");
           setUsername("");
           setEmail("");
@@ -34,6 +40,7 @@ const RegisterPage = () => {
           setFile("");
           setError("");
         } else {
+          setIsLoading(false);
           setInfoMessage("");
           setError(response.data.message);
         }
@@ -42,13 +49,14 @@ const RegisterPage = () => {
   };
 
   useEffect(() => {
-    if (localStorage.getItem("loggedUserId") === 0) {
-      navigate("/main");
+    if (loggedUserId !== 0) {
+      navigate("/home");
     }
   }, []);
 
   return (
     <div className="center-container">
+      {isLoading && <LoadingSpinner />}
       {infoMessage && (
         <p className="info-message" style={{ marginBottom: "15px" }}>
           {infoMessage}
@@ -65,7 +73,7 @@ const RegisterPage = () => {
       </p>
       <input
         type="text"
-        placeholder="Username"
+        placeholder="Display Name"
         value={username}
         onChange={(e) => {
           setUsername(e.target.value);
@@ -94,7 +102,7 @@ const RegisterPage = () => {
         style={{ marginTop: "15px" }}
       />
       <div className="fileinput-container" style={{ marginTop: "15px" }}>
-        <p className="light-grey" style={{ marginRight: "12px" }}>
+        <p className="light-grey" style={{ marginRight: "6px" }}>
           Please select your profile picture:
         </p>
         <div className="file-input-container">

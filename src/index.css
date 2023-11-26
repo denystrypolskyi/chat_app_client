@@ -15,14 +15,28 @@ body {
   color: white;
 }
 
-.contacts {
-  height: 100vh;
-  width: 30%;
-  overflow: auto;
+.contacts-container {
+  width: 20vw;
+  height: 93vh;
   background-color: #17212b;
+  overflow-y: auto;
 }
 
-.contacts::-webkit-scrollbar {
+.panel-container {
+  border-top: 1px solid #0e1621;
+  background-color: #17212b;
+  height: 7vh;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+
+.switch-account {
+  cursor: pointer;
+  color: red;
+}
+
+.contacts-container::-webkit-scrollbar {
   display: none;
 }
 
@@ -86,7 +100,7 @@ body {
   margin-left: 5px;
   padding: 8.5px;
   border-radius: 10px;
-  background-color: #1f6cb7;
+  background-color: #182533;
   overflow: auto;
 }
 
@@ -216,7 +230,7 @@ body {
   color: green;
 }
 
-.hint-container {
+.mini-container {
   height: 100vh;
   width: 80vw;
   display: flex;
