@@ -21,9 +21,9 @@ const Contacts = ({
           return (
             <Contact
               key={index}
-              avatar={contact[3]}
-              name={contact[1]}
-              contactId={contact[0]}
+              avatar={contact.avatar}
+              name={contact.username}
+              contactId={contact.id}
               loggedUserId={loggedUserId}
               switchChat={switchChat}
               selectedContactId={selectedContactId}

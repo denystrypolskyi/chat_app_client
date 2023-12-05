@@ -4,9 +4,9 @@ import { useNavigate } from "react-router";
 import Contacts from "../Contacts/Contacts";
 import Messages from "../Messages/Messages";
 import MessageInput from "../MessageInput/MessageInput";
+import Logout from '../Logout/Logout'
 import * as contactActions from "../../actions/contactActions";
 import * as messageActions from "../../actions/messageActions";
-import * as userActions from "../../actions/userActions";
 import { API_URLS } from "../../apiConfig";
 
 const HomePage = () => {
@@ -78,7 +78,7 @@ const HomePage = () => {
         loggedUserId
       );
     }
-  }, []);
+  }, [loggedUserId]);
 
   return (
     <div className="container">
@@ -90,9 +90,7 @@ const HomePage = () => {
           selectedContactId={selectedContactId}
         />
         <div className="panel-container">
-          <span className="switch-account" onClick={userActions.Logout}>
-            Switch Account
-          </span>
+          <Logout />
         </div>
       </div>
       {selectedChatId && (

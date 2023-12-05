@@ -18,10 +18,10 @@ const Messages = ({ fetchingMessages, messages, messagesEndRef }) => {
           return (
             <Message
               key={index}
-              value={message[3]}
-              avatar={message[2]}
-              senderId={message[1]}
-              sentAt={message[4]}
+              value={message.message_text}
+              avatar={message.sender_avatar}
+              senderId={message.sender_id}
+              sentAt={message.created_at}
             />
           );
         })

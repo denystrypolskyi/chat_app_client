@@ -33,7 +33,7 @@ body {
 
 .switch-account {
   cursor: pointer;
-  color: red;
+  color: #B83044;
 }
 
 .contacts-container::-webkit-scrollbar {

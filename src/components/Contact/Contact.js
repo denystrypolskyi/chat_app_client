@@ -35,7 +35,7 @@ const Contact = ({
             setLastMessage(response.data.lastMessage);
             setLastMessageSentAt(response.data.lastMessageSentAt);
           } else {
-            // console.log(response.data);
+            console.log(response.data);
           }
         });
     };
