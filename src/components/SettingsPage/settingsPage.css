@@ -1,0 +1,108 @@
+.settings-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    width: 100%;
+    background-color: #0e1621;
+}
+
+.wrapper {
+    width: 800px;
+    border: 2px solid #17212B;
+    padding: 5px 30px 15px 30px;
+    border-radius: 5px;
+}
+
+.wrapper .input-data {
+    margin-top: 20px;
+    height: 40px;
+    width: 100%;
+    position: relative;
+}
+
+.wrapper .input-data input {
+    height: 100%;
+    width: 100%;
+    border: none;
+    font-size: 17px;
+    color: white;
+    background-color: transparent;
+    border-bottom: 1px solid #313C49;
+}
+
+.wrapper .custom-btn {
+    margin-top: 20px;
+    height: 40px;
+    width: 80px;
+}
+
+.custom-btn {
+    padding: 10px;
+    background-color: #1D2A38;
+    color: #51B2F2;
+    font-weight: 600;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.custom-btn.cancel {
+    margin-right: 10px;
+}
+
+
+.custom-btn:hover {
+    transition: 0.3s ease;
+    background-color: #223144;
+}
+
+.custom-btn:active {
+    transition: 0.3s ease;
+    background-color: #2C3B4E;
+}
+
+.input-data input:focus ~ label,
+.input-data input:valid ~ label {
+    transform: translateY(-20px);
+    font-size: 15px;
+    color: #5594CE;
+}
+
+.wrapper .input-data label {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    color: #6F8398;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.input-data .underline {
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    bottom: 0;
+}
+
+.input-data .underline:before {
+    position: absolute;
+    content: "";
+    height: 100%;
+    width: 100%;
+    background: #5594CE;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.3s ease;
+}
+
+.input-data input:focus ~ .underline:before,
+.input-data input:valid ~ .underline:before {
+    transform: scaleX(1);
+}
+
+.button-group {
+    display: flex;
+    justify-content: flex-end;
+}

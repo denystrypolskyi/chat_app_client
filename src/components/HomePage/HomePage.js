@@ -4,7 +4,6 @@ import {useNavigate} from "react-router";
 import Contacts from "../Contacts/Contacts";
 import Messages from "../Messages/Messages";
 import MessageInput from "../MessageInput/MessageInput";
-import Logout from "../Logout/Logout";
 import * as contactActions from "../../actions/contactActions";
 import * as messageActions from "../../actions/messageActions";
 import {API_URLS} from "../../apiConfig";
@@ -82,7 +81,7 @@ const HomePage = () => {
 
     return (
         <div className="container">
-            <div style={{display: "flex", flexDirection: "column"}}>
+            <div style={{display: "flex", flexDirection: "column", width: "20vw"}}>
                 <Contacts
                     fetchingContacts={fetchingContacts}
                     contacts={contacts}
@@ -90,7 +89,15 @@ const HomePage = () => {
                     selectedContactId={selectedContactId}
                 />
                 <div className="panel-container">
-                    <Logout/>
+                    <div className="settings-btn" onClick={() => {
+                        navigate("/settings");
+                    }}><i className="fa-solid fa-gear" style={{color: "#5C78A0"}}/>
+                    </div>
+                    <div className="switch-account-btn" onClick={() => {
+                        localStorage.setItem("loggedUserId", 0);
+                        navigate("/login");
+                    }}><i className="fa-solid fa-arrow-right-from-bracket"/>
+                    </div>
                 </div>
             </div>
             {selectedChatId && (
@@ -115,7 +122,7 @@ const HomePage = () => {
                 </div>
             )}
             {!selectedChatId && (
-                <div className="mini-container">
+                <div className="secondary-container">
                     <p className="hint">Select a chat to start messaging</p>
                 </div>
             )}

@@ -73,7 +73,7 @@ const RegisterPage = () => {
             </p>
             <input
                 type="text"
-                placeholder="Display Name"
+                placeholder="Name"
                 value={username}
                 onChange={(e) => {
                     setUsername(e.target.value);
@@ -125,7 +125,7 @@ const RegisterPage = () => {
                 </div>
             </div>
             <button
-                className="custom-button"
+                className="custom-btn2"
                 onClick={handleClick}
                 style={{marginTop: "15px"}}
             >

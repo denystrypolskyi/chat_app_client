@@ -10,7 +10,7 @@ const Messages = ({fetchingMessages, messages, messagesEndRef}) => {
     return (
         <div className="messages-container">
             {fetchingMessages ? (
-                <div className="mini-container">
+                <div className="secondary-container">
                     <LoadingSpinner/>
                 </div>
             ) : (

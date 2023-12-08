@@ -77,7 +77,7 @@ const LoginPage = () => {
                 style={{marginTop: "15px"}}
             />
             <button
-                className="custom-button"
+                className="custom-btn2"
                 onClick={handleClick}
                 style={{marginTop: "15px"}}
             >
