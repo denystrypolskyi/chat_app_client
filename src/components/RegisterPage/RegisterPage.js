@@ -58,12 +58,12 @@ const RegisterPage = () => {
         <div className="center-container">
             {isLoading && <LoadingSpinner/>}
             {infoMessage && (
-                <p className="info-message" style={{marginBottom: "15px"}}>
+                <p className="success-message" style={{marginBottom: "15px"}}>
                     {infoMessage}
                 </p>
             )}
             {error && (
-                <p className="error" style={{marginBottom: "15px"}}>
+                <p className="error-message" style={{marginBottom: "15px"}}>
                     {error}
                 </p>
             )}

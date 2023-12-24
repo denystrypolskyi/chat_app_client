@@ -91,7 +91,7 @@ const HomePage = () => {
                 <div className="panel-container">
                     <div className="settings-btn" onClick={() => {
                         navigate("/settings");
-                    }}><i className="fa-solid fa-gear" style={{color: "#5C78A0"}}/>
+                    }}><i className="fa-solid fa-gear"/>
                     </div>
                     <div className="switch-account-btn" onClick={() => {
                         localStorage.setItem("loggedUserId", 0);

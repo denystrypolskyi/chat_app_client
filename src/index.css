@@ -1,260 +1,371 @@
 *,
 html,
 body {
-    margin: 0;
-    padding: 0;
-    outline: none;
-    box-sizing: border-box;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .container {
-    height: 100vh;
-    width: 100%;
-    display: flex;
-    background-color: #0e1621;
-    color: white;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  background-color: #0e1621;
+  color: white;
 }
 
 .contacts-container {
-    width: 100%;
-    height: 93vh;
-    background-color: #17212b;
-    overflow-y: auto;
+  width: 100%;
+  height: 93vh;
+  background-color: #17212b;
+  overflow-y: auto;
 }
 
 .panel-container {
-    border-top: 1px solid #0e1621;
-    background-color: #17212b;
-    height: 7vh;
-    justify-content: center;
-    display: flex;
-    align-items: center;
+  background-color: #17212b;
+  height: 7vh;
+  justify-content: center;
+  display: flex;
+  align-items: center;
 }
 
 .panel-container div {
-    margin-right: 10px;
+  margin-right: 10px;
 }
 
 .panel-container div:last-child {
-    margin-right: 0;
+  margin-right: 0;
 }
 
 .switch-account-btn {
-    cursor: pointer;
-    color: #B83044;
+  cursor: pointer;
+  color: #b83044;
 }
 
 .settings-btn {
-    cursor: pointer;
-    color: #E9E8CB;
+  cursor: pointer;
+  color: white;
 }
 
 .contacts-container::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
 .contact-info {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
 }
 
 .last-message-sent-at {
-    flex: 1;
-    font-size: 14px;
-    text-align: end;
-    padding-right: 6px;
+  flex: 1;
+  font-size: 14px;
+  text-align: end;
+  padding-right: 6px;
 }
 
 .messages-container {
-    display: flex;
-    flex-direction: column;
-    width: 80vw;
-    height: 93vh;
-    background-color: #0e1621;
-    overflow: auto;
+  display: flex;
+  flex-direction: column;
+  width: 80vw;
+  height: 93vh;
+  background-color: #0e1621;
+  overflow: auto;
 }
 
 .messages-container::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
 .user-message-container {
-    display: flex;
-    flex-direction: row-reverse;
-    align-items: center;
-    padding: 10px;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  padding: 10px;
 }
 
 .sender-message-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 8px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 8px;
 }
 
 .message-sent-at {
-    display: inline;
-    margin-left: 10px;
-    font-size: 12px;
+  display: inline;
+  margin-left: 10px;
+  font-size: 12px;
 }
 
 .user-message-text {
-    word-wrap: break-word;
-    margin-right: 5px;
-    padding: 8.5px;
-    border-radius: 10px;
-    background-color: #1f6cb7;
-    overflow: auto;
+  word-wrap: break-word;
+  margin-right: 5px;
+  padding: 8.5px;
+  border-radius: 10px;
+  background-color: #1f6cb7;
+  overflow: auto;
 }
 
 .sender-message-text {
-    word-wrap: break-word;
-    margin-left: 5px;
-    padding: 8.5px;
-    border-radius: 10px;
-    background-color: #182533;
-    overflow: auto;
+  word-wrap: break-word;
+  margin-left: 5px;
+  padding: 8.5px;
+  border-radius: 10px;
+  background-color: #182533;
+  overflow: auto;
 }
 
 .avatar {
-    width: 38px;
-    height: 38px;
-    border-radius: 50px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50px;
 }
 
 .message-input {
-    width: 100%;
-    height: 7vh;
-    padding: 8px;
-    border: none;
-    background: #17212b;
-    color: white;
-    outline: none;
-    border-left: 1px solid #0e1621;
+  width: 100%;
+  height: 7vh;
+  padding: 8px;
+  border: none;
+  background: #17212b;
+  color: white;
+  outline: none;
+  border-left: 1px solid #0e1621;
 }
 
 .hint {
-    background-color: #1e2c3a;
-    padding: 4px 12px;
-    border-radius: 10px;
-    display: inline-block;
+  background-color: #1e2c3a;
+  padding: 4px 12px;
+  border-radius: 10px;
+  display: inline-block;
 }
 
 .contact-last-message-text {
-    max-width: 100%;
-    height: 21.6px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    color: lightgrey;
+  max-width: 100%;
+  height: 21.6px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: lightgrey;
 }
 
 .contact-container {
-    width: 100%;
-    display: flex;
-    align-items: center;
+  width: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .contact-avatar {
-    width: 60px;
-    height: 60px;
-    padding: 6px;
-    border-radius: 50px;
+  width: 60px;
+  height: 60px;
+  padding: 6px;
+  border-radius: 50px;
 }
 
 .contact-container:hover {
-    background-color: #212b35;
-    cursor: pointer;
+  background-color: #212b35;
+  cursor: pointer;
 }
 
 .center-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 90vh;
-    text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 90vh;
+  text-align: center;
 }
 
 #fileInput {
-    display: none;
+  display: none;
 }
 
 .dark-blue {
-    color: #032b43;
+  color: #032b43;
 }
 
 .light-grey {
-    color: #68808e;
+  color: #68808e;
 }
 
 .custom-input {
-    border: 1px solid #cccccc72;
-    border-radius: 10px;
-    outline: none;
-    height: 50px;
-    width: 400px;
-    padding: 10px;
-    -webkit-transition: 0.5s;
-    transition: 0.5s;
+  border: 1px solid #cccccc72;
+  border-radius: 10px;
+  outline: none;
+  height: 50px;
+  width: 400px;
+  padding: 10px;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
 }
 
 .custom-input:hover {
-    border: 1px solid #2086ea;
+  border: 1px solid #2086ea;
 }
 
 .custom-input:focus {
-    border: 1px solid #1f6cb7;
+  border: 1px solid #1f6cb7;
 }
 
 .custom-btn2 {
-    border: none;
-    border-radius: 10px;
-    background-color: #3390ec;
-    color: white;
-    height: 45px;
-    width: 400px;
-    font-weight: 600;
-    cursor: pointer;
-    -webkit-transition: 0.5s;
-    transition: 0.5s;
+  border: none;
+  border-radius: 10px;
+  background-color: #3390ec;
+  color: white;
+  height: 45px;
+  width: 400px;
+  font-weight: 600;
+  cursor: pointer;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
 }
 
 .custom-btn2:hover {
-    background-color: #2086ea;
+  background-color: #2086ea;
 }
 
 .custom-btn2:active {
-    background-color: #1f6cb7;
+  background-color: #1f6cb7;
 }
 
 .fileinput-container {
-    display: flex;
-    width: 400px;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  width: 400px;
+  align-items: center;
+  justify-content: center;
 }
 
-.error {
-    color: red;
+.error-message {
+  color: red;
+}
+
+.success-message {
+  color: green;
 }
 
 .info-message {
-    color: green;
+  color: dodgerblue;
 }
 
 .secondary-container {
-    height: 100vh;
-    width: 80vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #0e1621;
+  height: 100vh;
+  width: 80vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #0e1621;
 }
 
 .contact-name {
-    max-width: 50%;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  max-width: 50%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.settings-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+  background-color: #0e1621;
+}
+
+.wrapper {
+  width: 800px;
+  border: 2px solid #17212b;
+  padding: 5px 30px 15px 30px;
+  border-radius: 5px;
+}
+
+.wrapper .input-data {
+  margin-top: 20px;
+  height: 40px;
+  width: 100%;
+  position: relative;
+}
+
+.wrapper .input-data input {
+  height: 100%;
+  width: 100%;
+  border: none;
+  font-size: 17px;
+  color: white;
+  background-color: transparent;
+  border-bottom: 1px solid #313c49;
+}
+
+.wrapper .custom-btn {
+  margin-top: 20px;
+  height: 40px;
+  width: 80px;
+}
+
+.custom-btn {
+  padding: 10px;
+  background-color: #1d2a38;
+  color: #51b2f2;
+  font-weight: 600;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.custom-btn.cancel {
+  margin-right: 10px;
+}
+
+.custom-btn:hover {
+  transition: 0.3s ease;
+  background-color: #223144;
+}
+
+.custom-btn:active {
+  transition: 0.3s ease;
+  background-color: #2c3b4e;
+}
+
+.input-data input:focus ~ label,
+.input-data input:valid ~ label {
+  transform: translateY(-20px);
+  font-size: 15px;
+  color: #5594ce;
+}
+
+.wrapper .input-data label {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  color: #6f8398;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.input-data .underline {
+  position: absolute;
+  height: 2px;
+  width: 100%;
+  bottom: 0;
+}
+
+.input-data .underline:before {
+  position: absolute;
+  content: "";
+  height: 100%;
+  width: 100%;
+  background: #5594ce;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}
+
+.input-data input:focus ~ .underline:before,
+.input-data input:valid ~ .underline:before {
+  transform: scaleX(1);
+}
+
+.button-group {
+  display: flex;
+  justify-content: flex-end;
 }

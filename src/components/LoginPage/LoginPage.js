@@ -7,7 +7,7 @@ import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 const LoginPage = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [error, setError] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
     const [isLoading, setIsLoading] = useState(false);
 
     const loggedUserId = parseInt(localStorage.getItem("loggedUserId")) || 0;
@@ -15,7 +15,7 @@ const LoginPage = () => {
     const navigate = useNavigate();
 
     const handleClick = () => {
-        setError("");
+        setErrorMessage("");
         setIsLoading(true);
         const formData = new FormData();
 
@@ -32,7 +32,7 @@ const LoginPage = () => {
                     navigate("/home");
                 } else {
                     setIsLoading(false);
-                    setError(response.data.message);
+                    setErrorMessage(response.data.message);
                 }
             })
             .catch((error) => console.error("Error: ", error));
@@ -47,9 +47,9 @@ const LoginPage = () => {
     return (
         <div className="center-container">
             {isLoading && <LoadingSpinner/>}
-            {error && (
-                <p className="error" style={{marginBottom: "15px"}}>
-                    {error}
+            {errorMessage && (
+                <p className="error-message" style={{marginBottom: "15px"}}>
+                    {errorMessage}
                 </p>
             )}
             <h1 className="dark-blue">Welcome Back!</h1>
