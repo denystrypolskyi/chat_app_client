@@ -369,3 +369,11 @@ body {
   display: flex;
   justify-content: flex-end;
 }
+
+.change-avatar-section {
+  width: 800px;
+  height: 250px;
+  margin-bottom: 50px;
+  text-align: center;
+  position: relative;
+}

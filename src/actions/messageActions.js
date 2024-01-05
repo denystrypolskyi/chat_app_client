@@ -32,8 +32,8 @@ export const sendMessage = (messageText, selectedChatId, setMessageText) => {
       setMessageText("");
       if (response.data.status === "error") {
         console.log("Error: ", response.data);
-      }else{
-        console.log(response.data); 
+      } else {
+        console.log(response.data);
       }
     })
     .catch((error) => console.error("Error: ", error));
