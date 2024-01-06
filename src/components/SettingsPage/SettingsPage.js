@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 import ChangeAvatar from "../ChangeAvatar/ChangeAvatar";
 import ChangePassword from "../ChangePassword/ChangePassword";

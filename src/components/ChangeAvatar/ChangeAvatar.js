@@ -76,7 +76,7 @@ const ChangeAvatar = ({
   return (
     <div className="change-avatar-section">
       <img
-        style={{ height: "100%", borderRadius: "50%", cursor: "pointer" }}
+        style={{ borderRadius: "50%", cursor: "pointer", height: "100%", maxWidth: "300px"}}
         src={currentAvatar}
         alt="Current Avatar"
         onMouseEnter={(e) => {
