@@ -32,6 +32,7 @@ const ChangeAvatar = ({
           import(`../../assets/img/${selectedFile.name}`)
             .then((image) => {
               setCurrentAvatar(image.default);
+              localStorage.setItem("avatar", selectedFile.name)
             })
             .catch((error) => {
               console.error("Image import error", error);
